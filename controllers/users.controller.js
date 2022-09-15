@@ -2,6 +2,8 @@ const User = require('../models/users');
 const bcrypt = require('bcryptjs');
 const sendMail = require('../providers/mailProvider');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 
 exports.findAll = async (req, res) => {
     await User.findAll({
@@ -127,7 +129,7 @@ exports.delete = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-    await sleep(1000);
+    await sleep(3000);
     function sleep(ms){
         return new Promise( (resolve) => {
             setTimeout(resolve,ms)
@@ -145,14 +147,18 @@ exports.login = async (req, res) => {
             erro: true,
             mensagem:"Erro: Email ou senha incorreta!!"
         })
+        
     }
+    // return res.json({mensagem: user});
+    // console.log(user);
+
     if(!(await bcrypt.compare(req.body.password, user.password))){
         return res.status(400).json({
             erro: true,
             mensagem: "Erro: Email ou senha incorreta!!!"
         })
     }
-
+    // console.log(user);
     var token = jwt.sign({ id: user.id }, process.env.SECRET, {
         expiresIn: 600 // 10min
         // expiresIn: 60 // 1min
@@ -161,7 +167,8 @@ exports.login = async (req, res) => {
     return res.json({
         erro:false,
         mensagem: "Login realizado com sucesso!!!",
-        token
+        token,
+        user: user.id
     })
 };
 

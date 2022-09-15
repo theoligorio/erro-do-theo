@@ -13,6 +13,8 @@ module.exports = {
         }
 
         const [bearer, token] = authHeader.split(' ');
+        // return res.json({mensagem: token});
+        
         if(!token){
             return res.status(400).json({
                 erro: true, 
@@ -22,7 +24,7 @@ module.exports = {
         try{
             const decoded = await promisify(jwt.verify)(token, process.env.SECRET);
             req.userId = decoded.id;
-
+            console.log(req.userId);
             return next();
         }catch(err){
             if(err){

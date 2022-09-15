@@ -12,7 +12,7 @@ usersRoutes.put("/update", validaToken, users.update);
 
 usersRoutes.delete("/delete/:id", validaToken, users.delete);
 
-usersRoutes.post("/login", validaToken, users.login);
+usersRoutes.post("/login", users.login);
 
 usersRoutes.put("/password", validaToken, users.password);
 
