@@ -27,7 +27,7 @@ const Haircuts = db.define('barberShop_cortes', {
     }
 })
 
-Products.belongsTo(Categories, {
+Haircuts.belongsTo(Categories, {
     constraint: true,
     foreignKey: 'categorieId',
     onDelete: 'RESTRICT',
@@ -35,7 +35,7 @@ Products.belongsTo(Categories, {
 })
 
 //Criar a tabela com sequelize
- //Haircuts.sync();
+//Haircuts.sync();
 
 //Excluir a tabela e criar novamente
 // Haircuts.sync({ force: true});

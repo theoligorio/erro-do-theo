@@ -1,4 +1,4 @@
-const Services = require('../models/services');
+const Services = require('../models/Services');
 const fs = require('fs')
 
 exports.findAll = async (req, res) => {
@@ -96,12 +96,12 @@ exports.delete = async (req, res) => {
 
 exports.editServicesImage = async (req, res) => {
     if(req.file){
-        // console.log(req.file);
+        console.log(req.file);
     
         await Services.findByPk(req.servicesId)
-        .then( services =>{
+        .then( barbershop_services =>{
             // console.log(services);
-            const imgOld = './public/upload/services/' + services.dataValues.image
+            const imgOld = './Public/Upload/Services/' + barbershop_services.dataValues.servicesImages
 
             fs.access(imgOld, (err) =>{
                 if(!err){
@@ -118,8 +118,8 @@ exports.editServicesImage = async (req, res) => {
         })
 
 
-        await Services.update({servicesImage: req.file.filename}, 
-            {where: {id: req.servicesId}})
+        await Services.update({servicesImages: req.file.filename}, 
+            {where: {id: req.userId}})
         .then(() => {
             return res.json({
                 erro: false,

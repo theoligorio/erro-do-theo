@@ -16,4 +16,6 @@ usersRoutes.post("/login", validaToken, users.login);
 
 usersRoutes.put("/password", validaToken, users.password);
 
+usersRoutes.get("/validartoken", validaToken, users.validatoken);
+
 module.exports = usersRoutes;

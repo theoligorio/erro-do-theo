@@ -190,7 +190,7 @@ exports.password = async (req, res) => {
     })
 };
 
-exports.validarToken = async(req, res) => {
+exports.validatoken = async(req, res) => {
 
     await sleep(3000);
     function sleep(ms) {
